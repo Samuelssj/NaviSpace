@@ -8,12 +8,9 @@ function changeScener(scene){
 
 }
 
-var menu = {
-
+var infinityBg = {
   bg : new Obj(0,0,500,715,"../assets/fundo.png"),
   bg2 : new Obj(0,-715,500,715,"../assets/fundo.png"),
-  title : new Texto("Navy Space"),
-
 
   movebg(){
     this.bg.y +=1;
@@ -27,46 +24,69 @@ var menu = {
     }
 
   },
-
   draw(){
     this.bg.draw();
     this.bg2.draw();
-    this.title.draw_text(40,"Arial",155,450,"white");
+  }
+
+
+}
+
+
+var menu = {
+
+  
+  title : new Texto("Navy Space"),
+  label : new Texto(">>Click Para Jogar<<"),
+  nave : new Obj(220,430,60,50,"../assets/nave.png"),
+
+
+ 
+
+  draw(){
+    infinityBg.draw();
+    this.title.draw_text(60,"Arial",100,300,"white");
+    this.label.draw_text(25,"Arial",130,370,"orange");
+    this.nave.draw();
 
   },
   update(){
 
-    this.movebg();
+    infinityBg.movebg();
 
   }
 }
 
 var game = {
 
-  bg : new Obj(0,0,500,900,"../assets/fundo.png"),
   score : new Texto("0"),
   nave : new Obj(220,600,60,50,"../assets/nave.png"),
 
   draw(){
-    this.bg.draw();
+    infinityBg.draw();
     this.score.draw_text(45,"Arial",240,100,"white"); 
     this.nave.draw();
 
   },
   update(){
+  infinityBg.movebg();
+
 
   }
 }
 
 var gameOver = {
-  bg : new Obj(0,0,500,900,"../assets/fundo.png"),
+  
   score : new Texto("0"),
 
   draw(){
-    this.bg.draw();
+    infinityBg.draw();
     this.score.draw_text(45,"Arial",240,100,"white"); 
   },
-  update(){},
+  update(){
+    infinityBg.movebg();
+
+  },
 
 
 }
