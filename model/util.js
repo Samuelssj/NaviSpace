@@ -66,3 +66,14 @@ class Shoot extends Obj{
     this.y -=10;
   }
 }
+
+class Meteors extends Obj{
+ // 10 maior valor e 2 o menor para a velocidade 
+  speed = Math.random() *(10 -2) + 2;
+
+move(){
+
+  this.y += this.speed;
+}
+
+}

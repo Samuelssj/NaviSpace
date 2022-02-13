@@ -6,6 +6,9 @@ var currentScener = {};
 
 var groupShot = [];
 
+var groupmeteor = [];
+
+
 var shoots = {
 
   draw(){
@@ -32,6 +35,53 @@ var shoots = {
   },
 
 };
+
+var meteors = { 
+
+  time: 0,
+
+
+  spawMeteors(){
+  this.time +=1;
+
+  size = Math.random() * (80 - 50) +50;
+  posX = Math.random() * (440- 10) + 10;
+
+  if(this.time >=60){
+
+    this.time =0;
+    groupmeteor.push(new Meteors(posX,-100,size,size,"../assets/meteoro.png"));
+
+  } 
+
+
+  },
+
+  draw(){
+
+    groupmeteor.forEach(m => {
+      m.draw(); 
+      
+    });
+
+  
+
+},
+
+update(){
+
+  this.spawMeteors();
+  groupmeteor.forEach(m => {
+    m.move();
+    if(m.y > 715){
+      groupmeteor.splice(groupmeteor.indexOf(m),1);
+
+    }
+  });
+
+},
+};
+
 
 
 
@@ -63,7 +113,6 @@ var infinityBg = {
 
 
 };
-
 
 var menu = {
 
@@ -110,6 +159,7 @@ var game = {
   click(){
 
     groupShot.push(new Shoot(this.nave.x +30,this.nave.y,2,10,"../assets/tiro.png"));
+ 
 
   },
 
@@ -119,6 +169,7 @@ var game = {
     this.score.draw_text(45,"Arial",240,100,"white"); 
     this.nave.draw(); 
     shoots.draw();
+    meteors.draw();
 
    
 
@@ -128,6 +179,7 @@ var game = {
   update(){
   infinityBg.movebg();
   shoots.update();
+  meteors.update();
  
   }
 };
