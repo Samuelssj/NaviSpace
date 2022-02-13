@@ -1,1 +1,3 @@
-document.addEventListener("click", function(e){});
+document.addEventListener("click", function(e){
+    changeScener(game);
+});

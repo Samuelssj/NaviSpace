@@ -47,12 +47,16 @@ class Obj{
 
 }
 
-class Text{
-  text = "";
+class Texto{
+  texto = " ";
+
+  constructor(text){
+    this.texto = text;
+  }
 
   draw_text(size, font, x, y, color){
     canvas.font = size + "px" + " " + font;
     canvas.fillStyle = color;
-    canvas.fillText(this.text, x, y);
+    canvas.fillText(this.texto, x, y);
   }
 }
