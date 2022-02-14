@@ -59,6 +59,12 @@ class Texto{
     canvas.fillStyle = color;
     canvas.fillText(this.texto, x, y);
   }
+
+
+  update_text(valor){
+    this.texto = valor;
+  }
+
 }
 
 class Shoot extends Obj{

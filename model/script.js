@@ -3,7 +3,8 @@ var canvas = document.getElementById('canvas').getContext("2d");
 canvas.imageSmoothingEnabled = false;
 
 var currentScener = {};
-
+var tiro = 1;
+var pts = 0;
 
 var groupShot = [];
 
@@ -64,6 +65,8 @@ var meteors = {
         if(shoot.collide(meteors)){
           groupShot.slice(groupShot.indexOf(shoot),1);
           groupmeteor.splice(groupmeteor.indexOf(meteors),1);
+          tiro =1;
+          pts += 1;
         }
         
       });
@@ -176,9 +179,13 @@ var game = {
   },
 
   click(){
-
-    groupShot.push(new Shoot(this.nave.x +this.nave.width / 2,this.nave.y,2,10,"../assets/tiro.png"));
- 
+    //varios tiros
+   // groupShot.push(new Shoot(this.nave.x +this.nave.width / 2,this.nave.y,2,10,"../assets/tiro.png"));
+   
+   if(tiro >0){
+     tiro -=1;
+     groupShot.push(new Shoot(this.nave.x +this.nave.width / 2,this.nave.y,2,10,"../assets/tiro.png"));
+   }
 
   },
 
@@ -198,7 +205,8 @@ var game = {
   update(){
   infinityBg.movebg();
   shoots.update();
-  meteors.update();
+  meteors.update(); 
+  this.score.update_text(pts);
  
   }
 };
@@ -215,10 +223,22 @@ var gameOver = {
   },
   update(){
     infinityBg.movebg();
+    this.score.update_text(pts); 
+ 
 
   },
 
+  cleanScener(){
+    tiro = 1;
+    groupmeteor = [];
+    groupShot = [];
+    pts = 0;
+
+  },
+
+
   click(){
+  this.cleanScener();
   changeScener(menu);
   },
 
