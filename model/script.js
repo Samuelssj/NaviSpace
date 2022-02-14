@@ -1,6 +1,7 @@
 var canvas = document.getElementById('canvas').getContext("2d");
 //pixelArt
 canvas.imageSmoothingEnabled = false;
+
 var currentScener = {};
 
 
@@ -53,6 +54,21 @@ var meteors = {
     groupmeteor.push(new Meteors(posX,-100,size,size,"../assets/meteoro.png"));
 
   } 
+  },
+
+  destroyMeteord(){
+
+    groupShot.forEach(shoot => {
+      groupmeteor.forEach(meteors => {
+
+        if(shoot.collide(meteors)){
+          groupShot.slice(groupShot.indexOf(shoot),1);
+          groupmeteor.splice(groupmeteor.indexOf(meteors),1);
+        }
+        
+      });
+      
+    });
 
 
   },
@@ -71,10 +87,13 @@ var meteors = {
 update(){
 
   this.spawMeteors();
+  this.destroyMeteord();
+
   groupmeteor.forEach(m => {
     m.move();
     if(m.y > 715){
       groupmeteor.splice(groupmeteor.indexOf(m),1);
+      changeScener(gameOver);
 
     }
   });
@@ -158,7 +177,7 @@ var game = {
 
   click(){
 
-    groupShot.push(new Shoot(this.nave.x +30,this.nave.y,2,10,"../assets/tiro.png"));
+    groupShot.push(new Shoot(this.nave.x +this.nave.width / 2,this.nave.y,2,10,"../assets/tiro.png"));
  
 
   },
@@ -187,14 +206,20 @@ var game = {
 var gameOver = {
   
   score : new Texto("0"),
+  label_gameover : new Texto("GAME OVER"),
 
   draw(){
     infinityBg.draw();
     this.score.draw_text(45,"Arial",240,100,"white"); 
+    this.label_gameover.draw_text(60,"Arial",70,300,"orange");
   },
   update(){
     infinityBg.movebg();
 
+  },
+
+  click(){
+  changeScener(menu);
   },
 
 
